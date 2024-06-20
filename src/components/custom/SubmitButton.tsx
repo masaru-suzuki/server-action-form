@@ -1,5 +1,5 @@
 'use client';
-import { useFormStatus } from 'react-dom';
+
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Loader2 } from 'lucide-react';
@@ -17,24 +17,23 @@ interface SubmitButtonProps {
   text: string;
   loadingText: string;
   className?: string;
-  loading?: boolean;
+  pending?: boolean;
 }
 
 export function SubmitButton({
   text,
   loadingText,
-  loading,
+  pending,
   className,
 }: Readonly<SubmitButtonProps>) {
-  const status = useFormStatus();
   return (
     <Button
       type="submit"
-      aria-disabled={status.pending || loading}
-      disabled={status.pending || loading}
+      aria-disabled={pending}
+      disabled={pending}
       className={cn(className)}
     >
-      {status.pending || loading ? <Loader text={loadingText} /> : text}
+      {pending ? <Loader text={loadingText} /> : text}
     </Button>
   );
 }
