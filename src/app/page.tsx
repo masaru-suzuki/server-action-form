@@ -3,17 +3,15 @@
 import { useActionState } from 'react';
 import { SubmitButton } from '@/components/custom/SubmitButton';
 import { FormElement } from '@/components/custom/FormElement';
-import { registerUser } from './data/actions/registerUser-actions';
+import {
+  ProfileFormProps,
+  registerUser,
+} from './data/actions/registerUser-actions';
 
-const INITIAL_STATE = {
+const INITIAL_STATE: ProfileFormProps = {
   name: 'hoge',
   email: 'hoge@email.com',
 };
-
-interface ProfileFormProps {
-  name: string;
-  email: string;
-}
 
 export default function Home() {
   const [state, formAction, pending] = useActionState(
