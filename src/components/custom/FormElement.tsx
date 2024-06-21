@@ -1,12 +1,15 @@
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
+import { ZodErrors } from './ZodErrors';
 
 export const FormElement = ({
   item,
   data = '',
+  errors = [],
 }: {
   item: string;
   data?: string;
+  errors?: string[] | null;
 }) => {
   return (
     <div className="grid justify-items-start gap-2">
@@ -18,6 +21,7 @@ export const FormElement = ({
         defaultValue={data}
         className="border border-gray-300 rounded-md text-white-700 bg-zinc-700"
       />
+      {errors && <ZodErrors error={errors} />}
     </div>
   );
 };
