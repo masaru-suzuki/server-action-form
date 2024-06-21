@@ -105,7 +105,7 @@ export async function registerUser(
       ...validatedData,
       zodErrors: null,
       registerErrors: responseData.error,
-      message: 'データ登録エラーが発生しました。',
+      message: 'データ登録エラーが発生しました',
     };
   }
 
