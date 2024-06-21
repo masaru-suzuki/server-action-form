@@ -11,8 +11,16 @@ export async function registerUser(
   prevState: ProfileFormProps,
   formData: FormData
 ) {
+  const rawFormData = Object.fromEntries(formData);
+
+  // payloadが受け取ったデータ
+  const payload = {
+    name: rawFormData.name,
+    email: rawFormData.email,
+  };
+
   console.log(prevState);
-  console.log(formData);
+  console.log(payload);
 
   // 本来であればここでAPIを叩いてユーザー登録処理を行う
   await sleep(2000);
