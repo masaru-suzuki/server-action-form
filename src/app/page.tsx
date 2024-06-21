@@ -7,6 +7,7 @@ import {
   RegisterState,
   registerUser,
 } from './data/actions/registerUser-actions';
+import { RegisterErrors } from '@/components/custom/RegisterErrors';
 
 const INITIAL_STATE: RegisterState = {
   name: 'hoge',
@@ -43,6 +44,7 @@ export default function Home() {
             pending={pending}
           />
         </div>
+        <RegisterErrors registerErrors={state.message} />
       </form>
     </div>
   );

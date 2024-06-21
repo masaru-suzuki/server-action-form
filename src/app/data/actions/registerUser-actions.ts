@@ -4,24 +4,28 @@ import { redirect } from 'next/navigation';
 import { z } from 'zod';
 
 const sleep = (ms: number) => new Promise((res) => setTimeout(res, ms));
+// const sleep = (ms: number) =>
+//   new Promise((_, reject) =>
+//     setTimeout(() => reject('データ登録中に何らかのエラーが発生しました'), ms)
+//   );
 
 // ダミーのAPI
 const registerDB = async (data: ProfileFormProps) => {
   try {
     await sleep(2000);
+
     return { data: data, error: null };
   } catch (error) {
-    console.error('Registration Service Error:', error);
     return { data: null, error: error as RegisterErrors };
   }
 };
 
-export interface ProfileFormProps {
+export type ProfileFormProps = {
   name: string;
   email: string;
-}
+};
 
-export type RegisterErrors = string[] | null;
+export type RegisterErrors = string | null;
 export type ZodErrors = {
   name?: string[];
   email?: string[];
@@ -69,10 +73,7 @@ export async function registerUser(
   // zodのバリデーション
   if (!validatedFields.success) {
     console.log({
-      ...payload,
       zodErrors: validatedFields.error.flatten().fieldErrors,
-      registerErrors: null,
-      message: '入力エラーがあります。修正してください。',
     });
 
     return {
@@ -94,7 +95,7 @@ export async function registerUser(
       ...validatedData,
       zodErrors: null,
       registerErrors: null,
-      message: 'レスポンスがありません。',
+      message: 'サーバーからのレスポンスがありません',
     };
   }
 
